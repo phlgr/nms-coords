@@ -6,4 +6,5 @@ export type Coordinate = {
   galaxy: string;
   type: string;
   version: string;
+  permalink: string;
 };
