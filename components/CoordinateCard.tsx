@@ -9,6 +9,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import Image from "next/image";
+import Link from "next/link";
 
 type CoordinateCardProps = {
   type: string;
@@ -47,10 +48,16 @@ const CoordinateCard = ({
       </Group>
 
       <Text>{desc}</Text>
-
-      <Button variant="light" fullWidth style={{ marginTop: theme.spacing.md }}>
-        Show Details
-      </Button>
+      <Link href={`/coordinates/${id}`} passHref>
+        <Button
+          component="a"
+          variant="light"
+          fullWidth
+          style={{ marginTop: theme.spacing.md }}
+        >
+          Show Details
+        </Button>
+      </Link>
     </Card>
   );
 };
