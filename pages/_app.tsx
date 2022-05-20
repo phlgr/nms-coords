@@ -6,6 +6,7 @@ import {
   MantineProvider,
 } from "@mantine/core";
 import { useLocalStorageValue } from "@mantine/hooks";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -18,6 +19,8 @@ export default function App(props: AppProps) {
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
+  const queryClient = new QueryClient();
+
   return (
     <>
       <Head>
@@ -27,18 +30,20 @@ export default function App(props: AppProps) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <ColorSchemeProvider
-        colorScheme={colorScheme}
-        toggleColorScheme={toggleColorScheme}
-      >
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{ colorScheme }}
+      <QueryClientProvider client={queryClient}>
+        <ColorSchemeProvider
+          colorScheme={colorScheme}
+          toggleColorScheme={toggleColorScheme}
         >
-          <Component {...pageProps} />
-        </MantineProvider>
-      </ColorSchemeProvider>
+          <MantineProvider
+            withGlobalStyles
+            withNormalizeCSS
+            theme={{ colorScheme }}
+          >
+            <Component {...pageProps} />
+          </MantineProvider>
+        </ColorSchemeProvider>
+      </QueryClientProvider>
     </>
   );
 }
