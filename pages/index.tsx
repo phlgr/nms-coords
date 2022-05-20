@@ -38,7 +38,7 @@ const Home: NextPage = () => {
     if (observedEntry.isIntersecting) {
       fetchNextPage();
     }
-  }, [observedEntry]);
+  }, [observedEntry, fetchNextPage, hasNextPage]);
 
   return (
     <Container>
