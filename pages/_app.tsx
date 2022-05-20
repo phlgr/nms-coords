@@ -7,6 +7,7 @@ import {
 } from "@mantine/core";
 import { useLocalStorageValue } from "@mantine/hooks";
 import { QueryClient, QueryClientProvider } from "react-query";
+import AppLayout from "../layout/AppLayout";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -40,7 +41,9 @@ export default function App(props: AppProps) {
             withNormalizeCSS
             theme={{ colorScheme }}
           >
-            <Component {...pageProps} />
+            <AppLayout>
+              <Component {...pageProps} />
+            </AppLayout>
           </MantineProvider>
         </ColorSchemeProvider>
       </QueryClientProvider>
