@@ -1,9 +1,22 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { MantineProvider } from "@mantine/core";
+import {
+  ColorScheme,
+  ColorSchemeProvider,
+  MantineProvider,
+} from "@mantine/core";
+import { useLocalStorageValue } from "@mantine/hooks";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
+
+  const [colorScheme, setColorScheme] = useLocalStorageValue<ColorScheme>({
+    key: "theme",
+    defaultValue: "dark",
+  });
+
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
   return (
     <>
@@ -14,14 +27,18 @@ export default function App(props: AppProps) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{ colorScheme: "dark" }}
+      <ColorSchemeProvider
+        colorScheme={colorScheme}
+        toggleColorScheme={toggleColorScheme}
       >
-        <Component {...pageProps} />
-      </MantineProvider>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{ colorScheme }}
+        >
+          <Component {...pageProps} />
+        </MantineProvider>
+      </ColorSchemeProvider>
     </>
   );
 }
