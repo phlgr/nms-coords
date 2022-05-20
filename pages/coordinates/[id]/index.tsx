@@ -4,16 +4,20 @@ import {
   Card,
   Container,
   Group,
+  Modal,
+  Pagination,
   Stack,
   Text,
   Title,
   useMantineTheme,
 } from "@mantine/core";
+import { usePagination } from "@mantine/hooks";
 import { ObjectId } from "mongodb";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Activity, ArrowLeft, GitMerge, Versions } from "tabler-icons-react";
+import { useState } from "react";
+import { Activity, ArrowLeft } from "tabler-icons-react";
 import clientPromise from "../../../lib/mongodb";
 import { Coordinate } from "../../../types/coordinates";
 
@@ -24,8 +28,36 @@ type CoordinatePageProps = {
 const CoordinatePage = ({ coordinate }: CoordinatePageProps) => {
   const router = useRouter();
   const theme = useMantineTheme();
+  const [currentActiveImage, setCurrentActiveImage] = useState(1);
+  const [openend, setOpenend] = useState(false);
   return (
     <Container>
+      <Modal
+        opened={openend}
+        size="90%"
+        onClose={() => setOpenend(false)}
+        title="Gallery"
+        centered
+      >
+        <Container p="xl" style={{ height: "60vw", position: "relative" }}>
+          <Image
+            src={coordinate.images[currentActiveImage - 1]}
+            layout="fill"
+            objectFit="contain"
+            alt=""
+          />
+        </Container>
+        {coordinate.images.length > 1 && (
+          <Group position="center">
+            <Pagination
+              page={currentActiveImage}
+              onChange={setCurrentActiveImage}
+              total={coordinate.images.length}
+            />
+          </Group>
+        )}
+      </Modal>
+
       <Button
         variant="subtle"
         onClick={() => router.back()}
@@ -37,6 +69,7 @@ const CoordinatePage = ({ coordinate }: CoordinatePageProps) => {
       <Card>
         <Card.Section>
           <Image
+            onClick={() => setOpenend(true)}
             src={coordinate.thumbnail}
             width={1000}
             height={600}
