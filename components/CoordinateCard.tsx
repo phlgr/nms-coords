@@ -3,9 +3,7 @@ import {
   Button,
   Card,
   Group,
-  Stack,
   Text,
-  ThemeIcon,
   Title,
   useMantineTheme,
 } from "@mantine/core";
@@ -36,8 +34,8 @@ const CoordinateCard = ({
           alt=""
           height={170}
           width={300}
+          objectFit="cover"
           sizes="40vw"
-          layout="responsive"
           src={img}
         />
       </Card.Section>
