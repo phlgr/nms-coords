@@ -4,7 +4,6 @@ import clientPromise from "../../lib/mongodb";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     const page = +(req.query.page as string) || 1;
-    console.log(page);
 
     const step = 10;
     const client = await clientPromise;

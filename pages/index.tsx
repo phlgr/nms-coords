@@ -1,4 +1,3 @@
-import { ThemeContext } from "@emotion/react";
 import {
   ActionIcon,
   AppShell,
