@@ -1,7 +1,8 @@
-import { MongoClient } from "mongodb";
+// Based on https://github.com/vercel/next.js/blob/canary/examples/with-mongodb/lib/mongodb.js
+import { MongoClient, MongoClientOptions } from "mongodb";
 
 const uri = process.env.MONGODB_URI;
-const options = {};
+const options: MongoClientOptions = {};
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
@@ -10,10 +11,12 @@ if (!uri) {
   throw new Error("Please add your Mongo URI to .env.local");
 }
 
-declare module global {
-  // eslint-disable-next-line no-unused-vars
-  let _mongoClientPromise: Promise<MongoClient>;
-}
+declare var global: {
+  /*~ Here, declare things that go in the global namespace, or augment
+   *~ existing declarations in the global namespace
+   */
+  _mongoClientPromise: Promise<MongoClient> | undefined;
+};
 
 if (process.env.NODE_ENV === "development") {
   // In development mode, use a global variable so that the value
