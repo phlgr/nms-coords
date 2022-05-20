@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   Group,
+  Stack,
   Text,
   ThemeIcon,
   Title,
@@ -29,9 +30,10 @@ const CoordinateCard = ({
   const theme = useMantineTheme();
 
   return (
-    <Card>
+    <Card style={{ display: "flex", flexDirection: "column" }}>
       <Card.Section>
         <Image
+          alt=""
           height={170}
           width={300}
           sizes="40vw"
@@ -47,7 +49,7 @@ const CoordinateCard = ({
         <Badge>{galaxy}</Badge>
       </Group>
 
-      <Text>{desc}</Text>
+      <Text style={{ flexGrow: 1 }}>{desc}</Text>
       <Link href={`/coordinates/${id}`} passHref>
         <Button
           component="a"
