@@ -2,15 +2,13 @@ import {
   Badge,
   Button,
   Card,
-  Grid,
   Group,
-  Image,
-  Stack,
   Text,
   ThemeIcon,
   Title,
   useMantineTheme,
 } from "@mantine/core";
+import Image from "next/image";
 
 type CoordinateCardProps = {
   type: string;
@@ -32,7 +30,13 @@ const CoordinateCard = ({
   return (
     <Card>
       <Card.Section>
-        <Image height={170} src={img} />
+        <Image
+          height={170}
+          width={300}
+          sizes="40vw"
+          layout="responsive"
+          src={img}
+        />
       </Card.Section>
       <Group
         position="apart"
