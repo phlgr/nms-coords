@@ -2,8 +2,10 @@ import {
   Badge,
   Button,
   Card,
+  Grid,
   Group,
   Image,
+  Stack,
   Text,
   ThemeIcon,
   Title,
@@ -15,15 +17,22 @@ type CoordinateCardProps = {
   desc: string;
   img: string;
   galaxy: string;
+  id: string;
 };
 
-const CoordinateCard = ({ type, desc, img, galaxy }: CoordinateCardProps) => {
+const CoordinateCard = ({
+  type,
+  desc,
+  img,
+  galaxy,
+  id,
+}: CoordinateCardProps) => {
   const theme = useMantineTheme();
 
   return (
     <Card>
       <Card.Section>
-        <Image src={img} />
+        <Image height={170} src={img} />
       </Card.Section>
       <Group
         position="apart"
@@ -32,8 +41,10 @@ const CoordinateCard = ({ type, desc, img, galaxy }: CoordinateCardProps) => {
         <Title order={3}>{type}</Title>
         <Badge>{galaxy}</Badge>
       </Group>
+
       <Text>{desc}</Text>
-      <Button variant="light" fullWidth style={{ marginTop: theme.spacing.sm }}>
+
+      <Button variant="light" fullWidth style={{ marginTop: theme.spacing.md }}>
         Show Details
       </Button>
     </Card>
