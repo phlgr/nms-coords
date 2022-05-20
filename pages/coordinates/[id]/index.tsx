@@ -11,13 +11,13 @@ import {
   Title,
   useMantineTheme,
 } from "@mantine/core";
-import { usePagination } from "@mantine/hooks";
 import { ObjectId } from "mongodb";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Activity, ArrowLeft } from "tabler-icons-react";
+import { ArrowLeft, ExternalLink } from "tabler-icons-react";
 import clientPromise from "../../../lib/mongodb";
 import { Coordinate } from "../../../types/coordinates";
 
@@ -34,13 +34,22 @@ const CoordinatePage = ({ coordinate }: CoordinatePageProps) => {
     <Container>
       <Modal
         opened={openend}
-        size="90%"
+        size="100%"
         onClose={() => setOpenend(false)}
         title="Gallery"
-        centered
       >
-        <Container p="xl" style={{ height: "60vw", position: "relative" }}>
+        <Container
+          style={{
+            height: "60vw",
+            pointerEvents: "none",
+            position: "unset",
+          }}
+        >
           <Image
+            style={{
+              width: "100%",
+              position: "relative",
+            }}
             src={coordinate.images[currentActiveImage - 1]}
             layout="fill"
             objectFit="contain"
@@ -48,7 +57,7 @@ const CoordinatePage = ({ coordinate }: CoordinatePageProps) => {
           />
         </Container>
         {coordinate.images.length > 1 && (
-          <Group position="center">
+          <Group position="center" style={{ zIndex: 1 }}>
             <Pagination
               page={currentActiveImage}
               onChange={setCurrentActiveImage}
@@ -80,12 +89,25 @@ const CoordinatePage = ({ coordinate }: CoordinatePageProps) => {
         <Stack style={{ marginTop: theme.spacing.md }}>
           <Group position="apart">
             <Group>
-              <Title order={3}>{coordinate.type}</Title>
+              <Title order={2}>{coordinate.type}</Title>
               <Badge>{coordinate.galaxy}</Badge>
             </Group>
-            <Badge>
-              <Activity size={14} /> {coordinate.version}
-            </Badge>
+            <Group>
+              <Badge>Version: {coordinate.version}</Badge>
+              <Link href={coordinate.permalink} passHref>
+                <Button
+                  target="_blank"
+                  component="a"
+                  compact
+                  radius="sm"
+                  color="blue"
+                  variant="light"
+                  rightIcon={<ExternalLink size="14" />}
+                >
+                  Original Post
+                </Button>
+              </Link>
+            </Group>
           </Group>
           <Text>{coordinate.title}</Text>
         </Stack>
@@ -108,6 +130,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     }
 
     const formattedCoordinate: Coordinate = {
+      permalink: coordinate.permalink,
       id: coordinate._id.toString(),
       galaxy: coordinate.galaxy,
       thumbnail: coordinate.images[0],
