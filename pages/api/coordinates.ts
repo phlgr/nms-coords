@@ -25,6 +25,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         galaxy: result.galaxy,
         type: result.type,
         version: result.version,
+        permalink: result.permalink,
       };
     });
 
