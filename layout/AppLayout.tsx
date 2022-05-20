@@ -6,8 +6,9 @@ import {
   Title,
   useMantineColorScheme,
 } from "@mantine/core";
+import Link from "next/link";
 import type { ReactNode } from "react";
-import { MoonStars, Sun } from "tabler-icons-react";
+import { MoonStars, Sun, World } from "tabler-icons-react";
 
 type AppLayoutProps = {
   children: ReactNode;
@@ -20,7 +21,14 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       header={
         <Header height={60} p="xs">
           <Group position="apart">
-            <Title>NMS Coordinates</Title>
+            <Link href="/" passHref>
+              <Group spacing="xs" style={{ cursor: "pointer" }}>
+                <ActionIcon size="lg" color="blue" variant="light">
+                  <World size={20} />
+                </ActionIcon>{" "}
+                <Title>NMS Coordinates</Title>
+              </Group>
+            </Link>
             <ActionIcon
               variant="default"
               onClick={() => toggleColorScheme()}
