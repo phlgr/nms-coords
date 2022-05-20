@@ -55,7 +55,7 @@ const Home: NextPage = () => {
       header={
         <Header height={60} p="xs">
           <Group position="apart">
-            <Title>No Man's Sky Coordinates</Title>
+            <Title>NMS Coordinates</Title>
             <ActionIcon
               variant="default"
               onClick={() => toggleColorScheme()}
@@ -73,7 +73,13 @@ const Home: NextPage = () => {
     >
       <Container>
         <LoadingOverlay visible={isLoading} />
-        <SimpleGrid cols={3}>
+        <SimpleGrid
+          cols={3}
+          breakpoints={[
+            { maxWidth: theme.breakpoints.xs, cols: 1 },
+            { maxWidth: theme.breakpoints.sm, cols: 2 },
+          ]}
+        >
           {data?.pages.map((page) => (
             <Fragment key={page.currentPage}>
               {page.results.map(({ postId, title, galaxy, images, type }) => (
