@@ -23,9 +23,9 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           <Group position="apart">
             <Link href="/" passHref>
               <Group spacing="xs" style={{ cursor: "pointer" }}>
-                <ActionIcon size="lg" color="blue" variant="light">
-                  <World size={20} />
-                </ActionIcon>{" "}
+                <ActionIcon size="md" color="blue" variant="light">
+                  <World size={16} />
+                </ActionIcon>
                 <Title>NMS Coordinates</Title>
               </Group>
             </Link>
