@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
   Badge,
   Button,
@@ -33,31 +34,27 @@ const CoordinatePage = ({ coordinate }: CoordinatePageProps) => {
   return (
     <Container>
       <Modal
-        opened={openend}
         size="100%"
+        opened={openend}
         onClose={() => setOpenend(false)}
         title="Gallery"
       >
-        <Container
+        <img
           style={{
-            height: "60vw",
-            pointerEvents: "none",
-            position: "unset",
+            objectFit: "contain",
+            width: "100%",
+            maxHeight: "80vh",
+            borderRadius: theme.radius.sm,
           }}
-        >
-          <Image
-            style={{
-              width: "100%",
-              position: "relative",
-            }}
-            src={coordinate.images[currentActiveImage - 1]}
-            layout="fill"
-            objectFit="contain"
-            alt=""
-          />
-        </Container>
+          src={coordinate.images[currentActiveImage - 1]}
+          alt=""
+        />
+
         {coordinate.images.length > 1 && (
-          <Group position="center" style={{ zIndex: 1 }}>
+          <Group
+            position="center"
+            style={{ zIndex: 1, marginTop: theme.spacing.md }}
+          >
             <Pagination
               page={currentActiveImage}
               onChange={setCurrentActiveImage}
