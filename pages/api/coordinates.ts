@@ -12,6 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const total = await collection.countDocuments();
     const results = await collection
       .find()
+      .sort({ createdAt: -1 })
       .skip(step * (page - 1))
       .limit(step)
       .toArray();
