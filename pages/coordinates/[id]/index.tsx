@@ -122,6 +122,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const db = client.db("nms");
     const collection = db.collection("coordinates");
     const coordinate = await collection.findOne({ _id: new ObjectId(id) });
+
     if (!coordinate) {
       throw new Error("Coordinate not found");
     }
@@ -135,6 +136,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       images: coordinate.images,
       title: coordinate.title,
       type: coordinate.type,
+      colors: coordinate.colors,
+      sub_types: coordinate.sub_types,
     };
 
     return {

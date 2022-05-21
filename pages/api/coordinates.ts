@@ -27,6 +27,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         type: result.type,
         version: result.version,
         permalink: result.permalink,
+        colors: result.colors,
+        sub_types: result.sub_types,
       };
     });
 

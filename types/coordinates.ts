@@ -7,4 +7,6 @@ export type Coordinate = {
   type: string;
   version: string;
   permalink: string;
+  colors: string[];
+  sub_types: string[];
 };
