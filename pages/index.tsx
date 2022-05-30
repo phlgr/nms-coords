@@ -52,16 +52,19 @@ const Home: NextPage = () => {
       >
         {data?.pages.map((page) => (
           <Fragment key={page.currentPage}>
-            {page.results.map(({ id, title, galaxy, images, type }) => (
-              <CoordinateCard
-                key={id}
-                desc={title}
-                galaxy={galaxy}
-                id={id}
-                img={images[0]}
-                type={type}
-              />
-            ))}
+            {page.results.map(
+              ({ id, title, galaxy, images, type, sub_types }) => (
+                <CoordinateCard
+                  key={id}
+                  desc={title}
+                  galaxy={galaxy}
+                  id={id}
+                  img={images[0]}
+                  type={type}
+                  subTypes={sub_types}
+                />
+              )
+            )}
           </Fragment>
         ))}
       </SimpleGrid>

@@ -84,10 +84,14 @@ const CoordinatePage = ({ coordinate }: CoordinatePageProps) => {
           />
         </Card.Section>
         <Stack style={{ marginTop: theme.spacing.md }}>
-          <Group position="apart">
+          <Group position="apart" style={{ textTransform: "capitalize" }}>
             <Group>
               <Title order={2}>{coordinate.type}</Title>
-              <Badge>{coordinate.galaxy}</Badge>
+              <Badge>
+                {coordinate.sub_types[0]
+                  ? coordinate.sub_types[0]
+                  : coordinate.galaxy}
+              </Badge>
             </Group>
             <Group>
               <Badge>Version: {coordinate.version}</Badge>
@@ -105,6 +109,13 @@ const CoordinatePage = ({ coordinate }: CoordinatePageProps) => {
                 </Button>
               </Link>
             </Group>
+          </Group>
+          <Group spacing="xs">
+            {coordinate.colors.map((color) => (
+              <Badge key={color} color={color}>
+                {color}
+              </Badge>
+            ))}
           </Group>
           <Text>{coordinate.title}</Text>
         </Stack>

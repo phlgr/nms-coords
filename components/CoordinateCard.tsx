@@ -16,6 +16,7 @@ type CoordinateCardProps = {
   img: string;
   galaxy: string;
   id: string;
+  subTypes: string[];
 };
 
 const CoordinateCard = ({
@@ -24,6 +25,7 @@ const CoordinateCard = ({
   img,
   galaxy,
   id,
+  subTypes,
 }: CoordinateCardProps) => {
   const theme = useMantineTheme();
 
@@ -42,10 +44,14 @@ const CoordinateCard = ({
         </Card.Section>
         <Group
           position="apart"
-          style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
+          style={{
+            marginBottom: 5,
+            marginTop: theme.spacing.sm,
+            textTransform: "capitalize",
+          }}
         >
           <Title order={3}>{type}</Title>
-          <Badge>{galaxy}</Badge>
+          <Badge>{subTypes[0] ? subTypes[0] : galaxy}</Badge>
         </Group>
 
         <Text style={{ flexGrow: 1 }}>{desc}</Text>
